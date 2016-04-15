@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AntConfiguration">
+    <buildFile url="file://$PROJECT_DIR$/webreader.xml">
+      <additionalClassPath>
+        <entry dir="file://$PROJECT_DIR$/assets" />
+      </additionalClassPath>
+    </buildFile>
+  </component>
+</project>

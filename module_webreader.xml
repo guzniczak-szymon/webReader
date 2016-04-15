@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_webreader" default="compile.module.webreader">
+    <dirname property="module.webreader.basedir" file="${ant.file.module_webreader}"/>
+
+    <property name="module.jdk.home.webreader" value="${project.jdk.home}"/>
+    <property name="module.jdk.bin.webreader" value="${project.jdk.bin}"/>
+    <property name="module.jdk.classpath.webreader" value="${project.jdk.classpath}"/>
+
+    <property name="compiler.args.webreader" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+
+    <property name="webreader.output.dir" value="${module.webreader.basedir}/out/production/WebReader"/>
+    <property name="webreader.testoutput.dir" value="${module.webreader.basedir}/out/test/WebReader"/>
+
+    <path id="webreader.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="webreader.module.production.classpath">
+        <path refid="${module.jdk.classpath.webreader}"/>
+    </path>
+
+    <path id="webreader.runtime.production.module.classpath">
+        <pathelement location="${webreader.output.dir}"/>
+    </path>
+
+    <path id="webreader.module.classpath">
+        <path refid="${module.jdk.classpath.webreader}"/>
+        <pathelement location="${webreader.output.dir}"/>
+    </path>
+
+    <path id="webreader.runtime.module.classpath">
+        <pathelement location="${webreader.testoutput.dir}"/>
+        <pathelement location="${webreader.output.dir}"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.webreader">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.webreader">
+        <patternset refid="excluded.from.module.webreader"/>
+    </patternset>
+
+    <path id="webreader.module.sourcepath">
+        <dirset dir="${module.webreader.basedir}">
+            <include name="src"/>
+            <include name="assets"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.webreader" depends="compile.module.webreader.production,compile.module.webreader.tests"
+            description="Compile module WebReader"/>
+
+    <target name="compile.module.webreader.production" description="Compile module WebReader; production classes">
+        <mkdir dir="${webreader.output.dir}"/>
+        <javac destdir="${webreader.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+               memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.webreader}/javac">
+            <compilerarg line="${compiler.args.webreader}"/>
+            <bootclasspath refid="webreader.module.bootclasspath"/>
+            <classpath refid="webreader.module.production.classpath"/>
+            <src refid="webreader.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.webreader"/>
+        </javac>
+
+        <copy todir="${webreader.output.dir}">
+            <fileset dir="${module.webreader.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+            <fileset dir="${module.webreader.basedir}/assets">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.webreader.tests" depends="compile.module.webreader.production"
+            description="compile module WebReader; test classes" unless="skip.tests"/>
+
+    <target name="clean.module.webreader" description="cleanup module">
+        <delete dir="${webreader.output.dir}"/>
+        <delete dir="${webreader.testoutput.dir}"/>
+    </target>
+</project>

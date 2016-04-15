@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="WebReader:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/WebReader_jar</output-path>
+    <root id="archive" name="WebReader.jar">
+      <element id="module-output" name="WebReader" />
+      <element id="dir-copy" path="$PROJECT_DIR$/assets" />
+    </root>
+  </artifact>
+</component>
