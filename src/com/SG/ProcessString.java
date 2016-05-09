@@ -212,6 +212,7 @@ public class ProcessString {
                         case "chms":
                         case "s":
                         case "schl":
+                        case "schmdb":
                             icon = weather;
                             break;
                         default:

@@ -61,8 +61,7 @@ public class SaveToFiles {
             }
             bw = Files.newBufferedWriter(f, StandardOpenOption.DSYNC, StandardOpenOption.WRITE);
             for (INDEXYdata d : data) {
-                bw.write(d.getSaveable() + "\t");
-
+                if (!d.getName().contentEquals("missing"))bw.write(d.getSaveable() + "\t");
             }
 
             bw.flush();
@@ -150,7 +149,7 @@ public class SaveToFiles {
         BufferedWriter bw;
         BufferedReader br;
         Path compound = Paths.get(Config.getOutputDirectory()+ File.separator + "compound.txt");
-        String compSeparator = ReferenceStrings.MOV_CAPTIONS[0] + Config.getAssetsDirectory()+"default.gif" + ReferenceStrings.MOV_CAPTIONS[1];
+        String compSeparator = ReferenceStrings.MOV_CAPTIONS[0] + Config.getAssetsDirectory()+"separator.gif" + ReferenceStrings.MOV_CAPTIONS[1];
         Path f;
 
         try {
@@ -162,7 +161,7 @@ public class SaveToFiles {
             bw = Files.newBufferedWriter(f, StandardOpenOption.DSYNC, StandardOpenOption.TRUNCATE_EXISTING);
             bw.write("Indeksy giełdowe:\t\t");
             for (INDEXYdata d : data2) {
-                bw.write(d.getSaveable() + "\t");
+                if (!d.getName().contentEquals("missing"))bw.write(d.getSaveable() + "\t");
 
             }
 
