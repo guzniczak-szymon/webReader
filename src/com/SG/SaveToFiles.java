@@ -149,7 +149,7 @@ public class SaveToFiles {
         BufferedWriter bw;
         BufferedReader br;
         Path compound = Paths.get(Config.getOutputDirectory()+ File.separator + "compound.txt");
-        String compSeparator = ReferenceStrings.MOV_CAPTIONS[0] + Config.getAssetsDirectory()+"separator.gif" + ReferenceStrings.MOV_CAPTIONS[1];
+        String compSeparator = ReferenceStrings.MOV_CAPTIONS[0] + Config.getAssetsDirectory()+File.separator+"separator.gif" + ReferenceStrings.MOV_CAPTIONS[1];
         Path f;
 
         try {
