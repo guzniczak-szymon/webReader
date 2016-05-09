@@ -1,8 +1,9 @@
 package com.SG.dataClasses;
 
 import com.SG.Config;
-import com.SG.statics.Assets;
 import com.SG.statics.ReferenceStrings;
+
+import java.io.File;
 
 /**
  * Created by WhoCares on 2016-03-12.
@@ -40,11 +41,11 @@ public class INDEXYdata {
     public String getSaveable() {
         String asset;
         if (zmiana > 0) {
-            asset = Config.getAssetsDirectory().toString()+"arrowup.gif";
+            asset = Config.getAssetsDirectory().toString()+ File.separator+"arrowup.gif";
         } else if (zmiana < 0) {
-            asset = Config.getAssetsDirectory().toString()+"arrowdown.gif";
+            asset = Config.getAssetsDirectory().toString()+File.separator+"arrowdown.gif";
         } else {
-            asset = Config.getAssetsDirectory().toString()+"nochange.gif";
+            asset = Config.getAssetsDirectory().toString()+File.separator+"nochange.gif";
         }
         return name + ":\t" + ReferenceStrings.MOV_CAPTIONS[0] + asset + ReferenceStrings.MOV_CAPTIONS[1] + zmiana + "%";
     }

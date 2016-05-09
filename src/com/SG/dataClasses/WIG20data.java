@@ -1,7 +1,9 @@
 package com.SG.dataClasses;
 
-import com.SG.statics.Assets;
+import com.SG.Config;
 import com.SG.statics.ReferenceStrings;
+
+import java.io.File;
 
 /**
  * Created by WhoCares on 2016-03-12.
@@ -34,11 +36,11 @@ public class WIG20data {
     public String getSaveable() {
         String asset;
         if (change > 0) {
-            asset = Assets.ARROWUP.getPath();
+            asset = Config.getAssetsDirectory().toString()+ File.separator+"arrowup.gif";
         } else if (change < 0) {
-            asset = Assets.ARROWDOWN.getPath();
+            asset = Config.getAssetsDirectory().toString()+ File.separator+"arrowdown.gif";
         } else {
-            asset = Assets.NOCHANGE.getPath();
+            asset = Config.getAssetsDirectory().toString()+ File.separator+"nochange.gif";
         }
         return name + ":\t" + value + "\t" + ReferenceStrings.MOV_CAPTIONS[0] + asset + ReferenceStrings.MOV_CAPTIONS[1] + change + "%";
     }

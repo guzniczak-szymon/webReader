@@ -1,8 +1,9 @@
 package com.SG.dataClasses;
 
 import com.SG.Config;
-import com.SG.statics.Assets;
 import com.SG.statics.ReferenceStrings;
+
+import java.io.File;
 
 /**
  * Created by WhoCares on 2016-03-12.
@@ -32,7 +33,7 @@ public class POGODAdata {
 
     public String getSaveable() {
 
-        return miasto + ":\t" + ReferenceStrings.MOV_CAPTIONS[0] + Config.getAssetsDirectory().toString()+zachmurzenie+".gif" + ReferenceStrings.MOV_CAPTIONS[1] + "\t" + temperatura + "\u00B0" + "C";
+        return miasto + ":\t" + ReferenceStrings.MOV_CAPTIONS[0] + Config.getAssetsDirectory().toString()+ File.separator+zachmurzenie+".gif" + ReferenceStrings.MOV_CAPTIONS[1] + "\t" + temperatura + "\u00B0" + "C";
     }
 
 
