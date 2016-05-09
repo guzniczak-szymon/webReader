@@ -38,7 +38,7 @@ public class Config {
     }
 
     public static void init() {
-
+//TODO:https://plugins.jetbrains.com/plugin/2162?pr=idea  https://plugins.jetbrains.com/plugin/2917?pr=idea https://plugins.jetbrains.com/plugin/7269?pr=idea https://plugins.jetbrains.com/plugin/7495?pr=idea
         try {
             configFile = Paths.get(ReferenceStrings.CURRENTPATH + File.separator + "config.cfg");
             if (!Files.exists(configFile)) {
@@ -50,38 +50,33 @@ public class Config {
             String s;
             while (br.readLine() != null) {
                 s = br.readLine();
-
-                switch (s.substring(0, s.indexOf("=") + 1)) {
-                    case ReferenceStrings.CUSTOMINPUTSTRING:
-                        if (s.contains(ReferenceStrings.SEPARATOR)) {
-                            int _index = s.indexOf(";");
-                            int i = 0;
-                            while (_index != -1) {
-                                String _s=s.substring(i, _index);
-                                if (_s.endsWith(".txt")){
-                                    inputPaths.add(_s);
-                                    Path _p=Paths.get(_s);
-                                    if (!Files.exists(_p)) {
-                                        Files.createFile(_p);
-                                    }
+                String sub_s=s.substring(0, s.indexOf("=") + 1);
+                if (sub_s.contentEquals(ReferenceStrings.CUSTOMINPUTSTRING)){
+                    if (s.contains(ReferenceStrings.SEPARATOR)) {
+                        int _index = s.indexOf(";");
+                        int i = 0;
+                        while (_index != -1) {
+                            String _s=s.substring(i, _index);
+                            if (_s.endsWith(".txt")){
+                                inputPaths.add(_s);
+                                Path _p=Paths.get(_s);
+                                if (!Files.exists(_p)) {
+                                    Files.createFile(_p);
                                 }
-                                i = _index + 1;
-                                _index = s.indexOf(";", i);
-
                             }
-                        } else {
-                            inputPaths.add(s.substring(s.indexOf(ReferenceStrings.CUSTOMINPUTSTRING) + ReferenceStrings.CUSTOMINPUTSTRING.length()));
-                        }
-                        break;
-                    case ReferenceStrings.ASSETSTRING:
-                        assetsDirectory = Paths.get(s.substring(s.indexOf(ReferenceStrings.ASSETSTRING) + ReferenceStrings.ASSETSTRING.length()));
-                        break;
-                    case ReferenceStrings.OUTPUTSTRING:
-                        outputDirectory = Paths.get(s.substring(s.indexOf(ReferenceStrings.OUTPUTSTRING) + ReferenceStrings.OUTPUTSTRING.length()));
-                        break;
+                            i = _index + 1;
+                            _index = s.indexOf(";", i);
 
-                    default:
-                        throw new Exception("Corrupted config file!, delete it and start application again.");
+                        }
+                    } else {
+                        inputPaths.add(s.substring(s.indexOf(ReferenceStrings.CUSTOMINPUTSTRING) + ReferenceStrings.CUSTOMINPUTSTRING.length()));
+                    }
+                }else if(sub_s.contentEquals(ReferenceStrings.ASSETSTRING)){
+                    assetsDirectory = Paths.get(s.substring(s.indexOf(ReferenceStrings.ASSETSTRING) + ReferenceStrings.ASSETSTRING.length()));
+                }else if(sub_s.contentEquals(ReferenceStrings.OUTPUTSTRING)){
+                    outputDirectory = Paths.get(s.substring(s.indexOf(ReferenceStrings.OUTPUTSTRING) + ReferenceStrings.OUTPUTSTRING.length()));
+                }else {
+                    throw new Exception("Corrupted config file!, delete it and start application again.");
                 }
             }
         } catch (Exception e) {
