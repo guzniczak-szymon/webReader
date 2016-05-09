@@ -111,7 +111,7 @@ public class Config {
         FileOutputStream fos;
 
         try {
-            jarFile= new JarFile(ReferenceStrings.CURRENTPATH+"WebReader.jar");
+            jarFile= new JarFile(ReferenceStrings.CURRENTPATH+File.separator+"WebReader.jar");
             Enumeration enu = jarFile.entries();
             while (enu.hasMoreElements()) {
                 jarEntry = (JarEntry) enu.nextElement();
