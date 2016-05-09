@@ -123,8 +123,6 @@ public class SaveToFiles {
         Path currency = Paths.get(Config.getOutputDirectory() + File.separator + "waluta.txt");
         Path f;
         try {
-            if (Files.notExists(Paths.get(ReferenceStrings.CURRENTPATH + File.separator + "textfiles")))
-                Files.createDirectory(Paths.get(ReferenceStrings.CURRENTPATH + File.separator + "textfiles"));
             if (!Files.exists(currency)) {
                 f = Files.createFile(currency);
             } else {
@@ -193,10 +191,6 @@ public class SaveToFiles {
             }
             bw.newLine();
             bw.write(compSeparator);
-            bw.newLine();
-
-            bw.newLine();
-            bw.newLine();
             bw.newLine();
             for (String input:Config.getInputPaths()){
                 try {
