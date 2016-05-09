@@ -115,9 +115,9 @@ public class Config {
             Enumeration enu = jarFile.entries();
             while (enu.hasMoreElements()) {
                 jarEntry = (JarEntry) enu.nextElement();
-                File f = new File(Config.getAssetsDirectory() + jarEntry.getName());
+                File f = new File(jarEntry.getName());
                 if(jarEntry.getName().contains("assets")){
-                    if (jarEntry.isDirectory() ) {
+                    if (jarEntry.isDirectory()) {
                         f.mkdir();
                         continue;
                     }
