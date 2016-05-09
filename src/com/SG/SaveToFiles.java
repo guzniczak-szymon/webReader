@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -194,7 +195,7 @@ public class SaveToFiles {
             bw.newLine();
             for (String input:Config.getInputPaths()){
                 try {
-                    br = Files.newBufferedReader(Paths.get(input));
+                    br = Files.newBufferedReader(Paths.get(input), Charset.forName("ISO-8859-2"));
                     boolean test = true;
                     while (test) {
                         String _s = br.readLine();
