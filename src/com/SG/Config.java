@@ -47,9 +47,8 @@ public class Config {
             }
             BufferedReader br;
             br = Files.newBufferedReader(configFile);
-            String s;
-            while (br.readLine() != null) {
-                s = br.readLine();
+            String s=br.readLine();
+            while (s != null) {
                 String sub_s=s.substring(0, s.indexOf("=") + 1);
                 if (sub_s.contentEquals(ReferenceStrings.CUSTOMINPUTSTRING)){
                     if (s.contains(ReferenceStrings.SEPARATOR)) {
@@ -73,11 +72,12 @@ public class Config {
                     }
                 }else if(sub_s.contentEquals(ReferenceStrings.ASSETSTRING)){
                     assetsDirectory = Paths.get(s.substring(s.indexOf(ReferenceStrings.ASSETSTRING) + ReferenceStrings.ASSETSTRING.length()));
+                    if (Files.notExists(assetsDirectory)){Files.createDirectory(assetsDirectory);}
                 }else if(sub_s.contentEquals(ReferenceStrings.OUTPUTSTRING)){
                     outputDirectory = Paths.get(s.substring(s.indexOf(ReferenceStrings.OUTPUTSTRING) + ReferenceStrings.OUTPUTSTRING.length()));
-                }else {
-                    throw new Exception("Corrupted config file!, delete it and start application again.");
+                    if (Files.notExists(outputDirectory)){Files.createDirectory(outputDirectory);}
                 }
+                s = br.readLine();
             }
         } catch (Exception e) {
 
@@ -94,12 +94,9 @@ public class Config {
         pathToOutput = ReferenceStrings.OUTPUTSTRING + ReferenceStrings.OUTPUT.toString();
         try {
             bw = Files.newBufferedWriter(configFile);
-            bw.write(pathToUserData);
-            bw.newLine();
-            bw.write(pathToAssets);
-            bw.newLine();
-            bw.write(pathToOutput);
-            bw.newLine();
+            bw.write(pathToUserData+"\n");
+            bw.write(pathToAssets+"\n");
+            bw.write(pathToOutput+"\n");
             bw.flush();
             bw.close();
         } catch (IOException e) {
@@ -137,7 +134,7 @@ public class Config {
         } catch (Exception e) {MyLogger.addToLog(e);
         }
 
-    }
+   }
 
     public static FileHandler getHandler() {
         return handler;
